@@ -285,6 +285,11 @@ function torbutton_init() {
     var environ = Components.classes["@mozilla.org/process/environment;1"]
                    .getService(Components.interfaces.nsIEnvironment);
 
+    if (environ.exists("TOR_NONTOR_PROXY"))
+        m_tb_prefs.setBoolPref("extensions.torbutton.use_nontor_proxy", true);
+    else
+        m_tb_prefs.setBoolPref("extensions.torbutton.use_nontor_proxy", false);
+
     if (environ.exists("TOR_CONTROL_PASSWD")) {
         m_tb_control_pass = environ.get("TOR_CONTROL_PASSWD");
     } else if (environ.exists("TOR_CONTROL_COOKIE_AUTH_FILE")) {
